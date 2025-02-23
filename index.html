@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Todo List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="https://videos.pexels.com/video-files/29518298/12706603_1920_1080_30fps.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="app-container">
+        <div class="stats-sidebar">
+            <div class="stats-header">
+                <h2>📊 Statistics</h2>
+            </div>
+            <div class="stats-content">
+                <div class="stat-card">
+                    <i class="fas fa-tasks"></i>
+                    <div class="stat-info">
+                        <span id="totalTasks">0</span>
+                        <label>Total Tasks</label>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-info">
+                        <span id="completedTasks">0</span>
+                        <label>Completed</label>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-info">
+                        <span id="pendingTasks">0</span>
+                        <label>Pending</label>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-fire"></i>
+                    <div class="stat-info">
+                        <span id="highPriorityTasks">0</span>
+                        <label>High Priority</label>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <div class="stat-info">
+                        <span id="completionRate">0%</span>
+                        <label>Completion Rate</label>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="stat-info">
+                        <span id="tasksToday">0</span>
+                        <label>Tasks Today</label>
+                    </div>
+                </div>
+                <div class="stat-card danger">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div class="stat-info">
+                        <span id="overdueTasks">0</span>
+                        <label>Overdue Tasks</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="todo-container">
+            <div class="header">
+                <h1>✨ My Tasks</h1>
+                <p class="subtitle">What's the plan for today?</p>
+                <div class="header-buttons">
+                    <button id="toggleNotes" class="notes-toggle">
+                        <i class="fas fa-sticky-note"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <input type="text" id="taskInput" placeholder="Add a new task...">
+                    <input type="datetime-local" id="dueDateInput" class="due-date-input">
+                    <select id="prioritySelect">
+                        <option value="high">High Priority</option>
+                        <option value="medium" selected>Medium Priority</option>
+                        <option value="low">Low Priority</option>
+                    </select>
+                    <button id="addTask">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="tasks-section">
+                <div class="task-filters">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-list-ul"></i> All
+                    </button>
+                    <button class="filter-btn" data-filter="todo">
+                        <i class="fas fa-clock"></i> Pending
+                    </button>
+                    <button class="filter-btn" data-filter="inprogress">
+                        <i class="fas fa-spinner"></i> In Progress
+                    </button>
+                    <button class="filter-btn" data-filter="done">
+                        <i class="fas fa-check-circle"></i> Completed
+                    </button>
+                </div>
+
+                <div class="task-stats">
+                    <div class="stat-item">
+                        <span id="totalTasks">0</span>
+                        <label>Total Tasks</label>
+                    </div>
+                    <div class="stat-item">
+                        <span id="completedTasks">0</span>
+                        <label>Completed</label>
+                    </div>
+                    <div class="stat-item">
+                        <span id="pendingTasks">0</span>
+                        <label>Pending</label>
+                    </div>
+                </div>
+
+                <div id="taskList" class="task-list">
+                    <!-- Tasks will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <div id="undoContainer" class="undo-container" style="display: none">
+            <i class="fas fa-undo"></i>
+            <span>Task deleted!</span>
+            <button onclick="undoDelete()" class="undo-btn">Undo</button>
+        </div>
+    </div>
+
+    <!-- Notes Modal -->
+    <div id="notesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📝 Quick Notes</h2>
+                <div class="modal-actions">
+                    <button id="addNoteBtn" class="add-note-btn">
+                        <i class="fas fa-plus"></i> New Note
+                    </button>
+                    <button class="close-modal-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="notesContainer" class="notes-container">
+                <!-- Notes will be added here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
