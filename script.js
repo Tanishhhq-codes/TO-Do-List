@@ -279,6 +279,33 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             undoDelete();
         }
+        
+        // New shortcuts
+        if (e.ctrlKey && e.key === 'd') {
+            e.preventDefault();
+            const selectedTask = document.querySelector('.task-item:hover');
+            if (selectedTask) {
+                deleteTask(selectedTask.getAttribute('data-task-id'));
+            }
+        }
+        
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault();
+            const selectedTask = document.querySelector('.task-item:hover');
+            if (selectedTask) {
+                changeStatus(selectedTask.getAttribute('data-task-id'));
+            }
+        }
+        
+        if (e.ctrlKey && e.key === 'm') {
+            e.preventDefault();
+            document.getElementById('toggleNotes').click();
+        }
+        
+        if (e.ctrlKey && e.key === 'p') {
+            e.preventDefault();
+            document.getElementById('prioritySelect').focus();
+        }
     });
 
     // Add task functionality
